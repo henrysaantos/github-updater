@@ -1,13 +1,13 @@
-#github-updater
+# github-updater
 Atualize automaticamente seus plugins de acordo com a última versão em release disponível no projeto do github público ou privado.
 
-##Plataformas disponíveis
+## Plataformas disponíveis
  - Bukkit
  - Bungeecord (em desenvolvimento)
  
-##Modo de uso
+## Modo de uso
 
-###Bukkit:
+### Bukkit:
 `````java
 public class Main extends JavaPlugin {
 
