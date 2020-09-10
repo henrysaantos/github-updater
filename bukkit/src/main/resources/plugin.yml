@@ -1,0 +1,4 @@
+name: github-updater
+version: ${project.version}
+main: com.henryfabio.githubupdater.bukkit.GithubUpdater
+authors: [Henry_Fabio]
