@@ -15,6 +15,10 @@ import org.kohsuke.github.GHRepository;
 import java.io.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author Henry Fábio
@@ -25,14 +29,16 @@ import java.util.Map;
 public final class UpdaterManager {
 
     private final Updater updater;
-    private final Map<String, Update> updatedPluginSet = new LinkedHashMap<>();
+    private final Map<String, Update> updatedPluginSet = new ConcurrentHashMap<>();
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     public void updatePlugin(UpdaterPlugin plugin) {
-        Thread thread = new Thread(() -> {
+        executor.submit(() -> {
             PluginRepository repository = plugin.getRepository();
-
             PluginRelease release = repository.findLastRelease().orElse(null);
-            if (release == null) return;
+            if (release == null) {
+                return;
+            }
 
             Update lastUpdate = updatedPluginSet.get(plugin.getName());
             if (lastUpdate != null) {
@@ -48,12 +54,11 @@ public final class UpdaterManager {
             boolean equalsVersion = isEqualsVersion(plugin, release);
             if (!equalsVersion) {
                 plugin.info("The plugin need update! " +
-                        "Current version: " + plugin.getDescription().getVersion() + " - " +
-                        "New version: " + release.getVersion());
+                  "Current version: " + plugin.getDescription().getVersion() + " - " +
+                  "New version: " + release.getVersion());
                 downloadPluginUpdate(plugin, release);
             }
         });
-        thread.start();
     }
 
     @SneakyThrows
