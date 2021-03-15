@@ -5,4 +5,4 @@ Atualize automaticamente os seus plugins de acordo com a última versão criada 
 - Bukkit
 
 ## Modo de uso
-Clique [aqui](https://github.com/HenryFabio/github-updater/example/) para ver um exemplo de uso deste projeto.
+Clique [aqui](https://github.com/HenryFabio/github-updater/tree/main/example) para ver um exemplo de uso deste projeto.
