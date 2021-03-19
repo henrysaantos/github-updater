@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm") version "1.4.21" apply false
-    id("maven-publish")
+    id("maven")
 }
 
 allprojects {
@@ -17,5 +17,6 @@ allprojects {
 subprojects {
 
     apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "maven")
 
 }
