@@ -11,7 +11,7 @@ import java.util.logging.Logger
 
 class UpdaterCheckerRunnable(
     private val logger: Logger,
-    private val credentials: GithubCredentials,
+    private val credentials: GithubCredentials?,
     private val updatablePluginRegistry: UpdatablePluginRegistry,
     private val pluginUpdateRegistry: PluginUpdateRegistry,
     private val updatablePluginHandle: UpdatablePluginHandle
@@ -32,7 +32,7 @@ class UpdaterCheckerRunnable(
 
                 pluginUpdate.pluginAsset.download(
                     pluginUpdate.downloadFile,
-                    credentials.accessToken()
+                    credentials?.accessToken()
                 ).get(5, TimeUnit.MINUTES)
 
                 pluginUpdateRegistry.registerPluginUpdate(pluginUpdate)

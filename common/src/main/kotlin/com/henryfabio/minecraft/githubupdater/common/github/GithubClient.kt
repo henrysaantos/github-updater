@@ -8,12 +8,16 @@ object GithubClient {
 
     lateinit var github: GitHub
 
-    fun connect(credentials: GithubCredentials) {
+    fun connect(credentials: GithubCredentials?) {
         try {
-            github = GitHub.connect(
-                credentials.username(),
-                credentials.accessToken()
-            )
+            github = if (credentials == null) {
+                GitHub.connectAnonymously()
+            } else {
+                GitHub.connect(
+                    credentials.username(),
+                    credentials.accessToken()
+                )
+            }
         } catch (throwable: Throwable) {
             throw GithubAuthenticationException(throwable)
         }

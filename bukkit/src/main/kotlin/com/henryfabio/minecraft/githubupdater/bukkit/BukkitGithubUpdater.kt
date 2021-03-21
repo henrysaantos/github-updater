@@ -10,7 +10,7 @@ import org.bukkit.plugin.Plugin
 class BukkitGithubUpdater(
     plugin: Plugin,
     configuration: UpdaterConfiguration,
-    credentials: GithubCredentials
+    credentials: GithubCredentials? = null
 ) : AbstractGithubUpdater(configuration, credentials) {
 
     init {

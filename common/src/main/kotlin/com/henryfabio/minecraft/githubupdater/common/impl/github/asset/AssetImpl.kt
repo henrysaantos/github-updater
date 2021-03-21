@@ -12,10 +12,12 @@ class AssetImpl(
     private val downloadUrl: URL
 ) : Asset {
 
-    override fun download(outputFile: File, accessToken: String): CompletableFuture<Void> {
+    override fun download(outputFile: File, accessToken: String?): CompletableFuture<Void> {
         deleteOutputFile(outputFile)
 
-        val downloadUrlWithAuthorization = URL("$downloadUrl?access_token=$accessToken")
+        val downloadUrlWithAuthorization = URL(
+            "$downloadUrl" + (if (accessToken != null) "?access_token=$accessToken" else "")
+        )
         return CompletableFuture.runAsync {
             HttpUtils.connect(downloadUrlWithAuthorization)?.let {
                 val outputStream = FileOutputStream(outputFile)

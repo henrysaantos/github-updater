@@ -7,6 +7,7 @@ import com.henryfabio.minecraft.githubupdater.api.plugin.UpdatablePluginHandle;
 import com.henryfabio.minecraft.githubupdater.api.plugin.UpdatablePluginRegistry;
 import com.henryfabio.minecraft.githubupdater.api.update.PluginUpdateRegistry;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.logging.Logger;
 
@@ -19,7 +20,7 @@ public interface GithubUpdater {
     @NotNull
     UpdaterConfiguration getConfiguration();
 
-    @NotNull
+    @Nullable
     GithubCredentials getCredentials();
 
     @NotNull

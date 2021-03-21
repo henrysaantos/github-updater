@@ -12,7 +12,7 @@ import java.util.logging.Logger
 
 open class AbstractGithubUpdater(
     private val configuration: UpdaterConfiguration,
-    private val credentials: GithubCredentials
+    private val credentials: GithubCredentials?
 ) : GithubUpdater {
 
     private val logger: Logger = Logger.getLogger("github-updater")
